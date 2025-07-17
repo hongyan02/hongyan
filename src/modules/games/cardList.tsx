@@ -1,7 +1,20 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { GameList } from "@/data/game/list";
+import GameList from "../../../data/game/list.json";
+
+/**
+ * 游戏数据类型定义
+ */
+interface GameData {
+    title: string;
+    description: string;
+    image: string;
+    link: string;
+    userName: string;
+    userAccount: string;
+    path: string;
+}
 
 /**
  * 游戏卡片列表组件
@@ -22,7 +35,7 @@ export default function CardList() {
 
     return (
         <div className="space-y-4">
-            {GameList.map((game, index) => (
+            {GameList.map((game: GameData, index: number) => (
                 <div key={index} className="p-4 border-b border-gray-200 first:border-t">
                     {/* 标题区域 */}
                     <div className="cursor-pointer" onClick={() => _handleTitleClick(game.path)}>

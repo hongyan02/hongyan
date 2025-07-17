@@ -2,23 +2,33 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { CopyIcon, CheckIcon } from "@radix-ui/react-icons";
-import { useGunCode, GunCodeData } from "@/query/df/guncode";
 import { useState, useMemo } from "react";
+import gunCodeData from "../../../data/game/gunCode.json";
+
+/**
+ * 武器代码数据类型
+ */
+interface GunCodeData {
+    type: string;
+    gunName: string;
+    description: string;
+    code: string;
+}
 
 /**
  * 三角洲行动武器代码组件
  * 使用Grid布局展示武器代码，按类型分类显示
  */
 export default function DFGunCode() {
-    const { data: gunCode, isLoading, error } = useGunCode();
     const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+
+    // 直接使用导入的JSON数据
+    const gunCode: GunCodeData[] = gunCodeData;
 
     /**
      * 根据类型分组武器数据
      */
     const groupedGunCode = useMemo(() => {
-        if (!gunCode) return {};
-
         const groups: Record<string, GunCodeData[]> = {};
         gunCode.forEach((gun) => {
             if (!groups[gun.type]) {
@@ -105,24 +115,6 @@ export default function DFGunCode() {
             </div>
         );
     };
-
-    if (isLoading) {
-        return (
-            <div className="flex items-center justify-center p-8">
-                <div className="text-gray-500">加载中...</div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="flex items-center justify-center p-8">
-                <div className="text-red-500">
-                    加载失败：{error instanceof Error ? error.message : "未知错误"}
-                </div>
-            </div>
-        );
-    }
 
     if (!gunCode || gunCode.length === 0) {
         return (

@@ -1,0 +1,32 @@
+[
+    {
+        "type": "射手步枪",
+        "gunName": "M14射手步枪",
+        "description": "无敌消音",
+        "code": "6GPT20G07ODLT6ETQT3GS"
+    },
+    {
+        "type": "狙击步枪",
+        "gunName": "M700狙击步枪",
+        "description": "林树用",
+        "code": "6FG5OGC051CKRTT084FIR"
+    },
+    {
+        "type": "突击步枪",
+        "gunName": "腾龙突击步枪",
+        "description": "林树用",
+        "code": "6GBN6KC07ODLT6ETQT3GS"
+    },
+    {
+        "type": "突击步枪",
+        "gunName": "K416突击步枪",
+        "description": "林树用",
+        "code": "6FTTLTKD7ODLT6ETQT3GS"
+    },
+    {
+        "type": "手枪",
+        "gunName": "G18",
+        "description": "鼠鼠专用",
+        "code": "6GQAJJ80D3EVDUA78ELQR"
+    }
+]
