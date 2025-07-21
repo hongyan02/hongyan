@@ -1,43 +1,43 @@
 name: Deploy via SSH
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+    deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/github_action_key
-          chmod 600 ~/.ssh/github_action_key
-          cat >> ~/.ssh/config <<EOF
-          Host myserver
-            HostName 111.230.192.103
-            User root
-            Port 2002
-            IdentityFile ~/.ssh/github_action_key
-            StrictHostKeyChecking no
-          EOF
+            - name: Set up SSH key
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/github_action_key
+                  chmod 600 ~/.ssh/github_action_key
+                  cat >> ~/.ssh/config <<EOF
+                  Host myserver
+                    HostName 111.230.192.103
+                    User root
+                    Port 2002
+                    IdentityFile ~/.ssh/github_action_key
+                    StrictHostKeyChecking no
+                  EOF
 
-      - name: SSH Deploy
-        run: |
-          ssh myserver << 'EOF'
-          echo "🔧 连接成功，开始部署..."
+            - name: SSH Deploy
+              run: |
+                  ssh myserver << 'EOF'
+                  echo "🔧 连接成功，开始部署..."
 
-          cd /root/blog/  # 改成你的项目目录
-          git pull origin main
+                  cd /root/blog/  # 改成你的项目目录
+                  git pull origin main
 
-          npm install
-          npm run build
+                  npm install
+                  npm run build
 
-          pm2 restart blog || pm2 start npm --name "blog" -- start
-          echo "✅ 部署完成"
-          EOF
+                  pm2 restart blog || pm2 start npm --name "blog" -- start
+                  echo "✅ 部署完成"
+                  EOF
