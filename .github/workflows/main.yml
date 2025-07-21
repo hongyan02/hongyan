@@ -1,0 +1,38 @@
+name: Deploy via SSH
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up SSH key
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/github_action_key
+                  chmod 600 ~/.ssh/github_action_key
+                  cat >> ~/.ssh/config <<EOF
+                  Host myserver
+                    HostName 111.230.192.103
+                    User root
+                    Port 2002
+                    IdentityFile ~/.ssh/github_action_key
+                    StrictHostKeyChecking no
+                  EOF
+
+            - name: Connect and deploy
+              run: |
+                  ssh myserver << 'EOF'
+                  echo "连接成功"
+                  # 你可以在这里运行部署命令，比如：
+                  # cd /var/www/your-project
+                  # git pull origin main
+                  # npm install && npm run build
+                  EOF
