@@ -28,5 +28,11 @@
         "gunName": "G18",
         "description": "鼠鼠专用",
         "code": "6GQAJJ80D3EVDUA78ELQR"
+    },
+    {
+        "type": "突击步枪",
+        "gunName": "KC17",
+        "description": "22W-半改常规",
+        "code": "6GUMG940B12QASUQB4J4K"
     }
 ]
