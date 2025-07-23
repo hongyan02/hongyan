@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: "AgCl",
-    description: "AgCl的个人博客",
+    description: "Happy coding",
     icons: {
         icon: "/favicon.ico",
     },
