@@ -39,7 +39,7 @@ const _extractPlainText = (htmlContent: string): string => {
  * 生成页面元数据
  */
 export const metadata = {
-    title: "博客 - 鸿雁",
+    title: "博客",
     description: "个人博客文章列表",
 };
 
